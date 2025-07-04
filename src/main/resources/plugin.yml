@@ -1,0 +1,4 @@
+name: LocatorToggle
+version: '1.0-SNAPSHOT'
+main: dev.axyss.locatorToggle.LocatorToggle
+api-version: '1.21'
