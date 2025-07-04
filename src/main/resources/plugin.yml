@@ -1,4 +1,9 @@
 name: LocatorToggle
 version: '1.0-SNAPSHOT'
-main: dev.axyss.locatorToggle.LocatorToggle
+main: dev.axyss.locatorToggle.Main
 api-version: '1.21'
+
+commands:
+  locator:
+    description: Toggle locator functionality
+    usage: /locator
