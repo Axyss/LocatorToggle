@@ -1,4 +1,4 @@
-package dev.axyss.locatorToggle.commands
+package dev.axyss.locatorToggle
 
 import org.bukkit.attribute.Attribute
 import org.bukkit.command.Command

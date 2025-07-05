@@ -1,9 +1,13 @@
 name: LocatorToggle
-version: '1.0-SNAPSHOT'
+version: '1.0'
+author: Axyss
 main: dev.axyss.locatorToggle.Main
 api-version: '1.21'
 
 commands:
   locator:
     description: Toggles locator bar functionality
-    usage: /locator
+
+permission:
+  locator.toggle:
+    default: true
