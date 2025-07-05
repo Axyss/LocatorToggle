@@ -24,8 +24,4 @@ object Language {
         val message = langFile.getString("messages.$messageKey") ?: "&cMessage not found!"
         return ChatColor.translateAlternateColorCodes('&', message)
     }
-
-    fun getPrefixedMessage(messageKey: String): String {
-        return getMessage("plugin-prefix") + " " + ChatColor.RESET + getMessage(messageKey)
-    }
 }

@@ -20,7 +20,7 @@ class LocatorCommand: CommandExecutor {
         val transmitRangeAttr = sender.getAttribute(Attribute.WAYPOINT_TRANSMIT_RANGE)
 
         if (receiveRangeAttr == null || transmitRangeAttr == null) {
-            sender.sendMessage(Language.getPrefixedMessage("not-supported"))
+            sender.sendMessage(Language.getMessage("not-supported"))
             return false
         }
 
@@ -28,12 +28,12 @@ class LocatorCommand: CommandExecutor {
             BlockDistance.WORLD_MAX.value -> {
                 receiveRangeAttr.baseValue = BlockDistance.NONE.value
                 transmitRangeAttr.baseValue = BlockDistance.NONE.value
-                sender.sendMessage(Language.getPrefixedMessage("locator-toggled-off"))
+                sender.sendMessage(Language.getMessage("locator-toggled-off"))
             }
             BlockDistance.NONE.value -> {
                 receiveRangeAttr.baseValue = BlockDistance.WORLD_MAX.value
                 transmitRangeAttr.baseValue = BlockDistance.WORLD_MAX.value
-                sender.sendMessage(Language.getPrefixedMessage("locator-toggled-on"))
+                sender.sendMessage(Language.getMessage("locator-toggled-on"))
             }
         }
         return true
