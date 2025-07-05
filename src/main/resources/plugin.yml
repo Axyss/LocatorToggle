@@ -5,5 +5,5 @@ api-version: '1.21'
 
 commands:
   locator:
-    description: Toggle locator functionality
+    description: Toggles locator bar functionality
     usage: /locator
