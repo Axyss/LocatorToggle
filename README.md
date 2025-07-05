@@ -8,6 +8,9 @@ Doing so, will also hide said player from other players' locator bars, providing
 
 ❗ **Gamerule 'locatorBar' must be set to 'true'**
 
+## 🎥 Demonstration
+<img src="./docs/demo.gif" width="650"/>
+
 ## 🛠️ Commands
 - **/locator** - Toggles the locator bar functionality on/off for the player.
 
