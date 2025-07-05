@@ -20,6 +20,7 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.7-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.bstats:bstats-bukkit:3.0.2")
 }
 
 tasks {
@@ -47,4 +48,8 @@ tasks.processResources {
     filesMatching("plugin.yml") {
         expand(props)
     }
+}
+
+tasks.shadowJar {
+    relocate("org.bstats", "dev.axyss.locatorToggle.utils")
 }
