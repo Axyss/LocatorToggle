@@ -1,5 +1,6 @@
-package dev.axyss.locatorToggle
+package dev.axyss.locatorToggle.commands
 
+import dev.axyss.locatorToggle.utils.Language
 import org.bukkit.attribute.Attribute
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -19,7 +20,7 @@ class LocatorCommand: CommandExecutor {
         val transmitRangeAttr = sender.getAttribute(Attribute.WAYPOINT_TRANSMIT_RANGE)
 
         if (receiveRangeAttr == null || transmitRangeAttr == null) {
-            sender.sendMessage("§cLocator bar is not supported on this server version.")
+            sender.sendMessage(Language.getPrefixedMessage("not-supported"))
             return false
         }
 
@@ -27,12 +28,12 @@ class LocatorCommand: CommandExecutor {
             BlockDistance.WORLD_MAX.value -> {
                 receiveRangeAttr.baseValue = BlockDistance.NONE.value
                 transmitRangeAttr.baseValue = BlockDistance.NONE.value
-                sender.sendMessage("§aLocator bar toggled §cOFF§a.")
+                sender.sendMessage(Language.getPrefixedMessage("locator-toggled-off"))
             }
             BlockDistance.NONE.value -> {
                 receiveRangeAttr.baseValue = BlockDistance.WORLD_MAX.value
                 transmitRangeAttr.baseValue = BlockDistance.WORLD_MAX.value
-                sender.sendMessage("§aLocator bar toggled §aON§a.")
+                sender.sendMessage(Language.getPrefixedMessage("locator-toggled-on"))
             }
         }
         return true

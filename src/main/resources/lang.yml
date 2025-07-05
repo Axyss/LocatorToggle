@@ -1,0 +1,6 @@
+messages:
+  plugin-prefix: "&8[&6LocatorToggle&8]"
+  locator-toggled-on: "&aLocator bar toggled &aON&a."
+  locator-toggled-off: "&aLocator bar toggled &cOFF&a."
+  not-supported: "&cLocator bar is not supported on this server version."
+
