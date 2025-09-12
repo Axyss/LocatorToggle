@@ -1,5 +1,3 @@
 messages:
   locator-toggled-on: "&aLocator bar toggled &a&lON"
   locator-toggled-off: "&aLocator bar toggled &c&lOFF"
-  not-supported: "Locator bar is not supported on this server version"
-

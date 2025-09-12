@@ -9,18 +9,17 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class Main : JavaPlugin() {
     override fun onEnable() {
-        Language.saveDefaultLang(this)
-        Language.loadFile(this)
-
         if (Bukkit.getUnsafe().dataVersion < 771) {
-            logger.severe(Language.getMessage("not-supported"))
+            logger.severe("Locator bar is not supported on this server version")
             Bukkit.getPluginManager().disablePlugin(this)
             return
         }
 
+        LocatorBarManager.plugin = this
+        Language.saveDefaultLang(this)
+        Language.loadFile(this)
         Bukkit.getPluginManager().registerEvents(PlayerListener, this)
-        Bukkit.getVersion()
-        getCommand("locator")?.setExecutor(LocatorCommand())
+        getCommand("locator")?.setExecutor(LocatorCommand(this))
         val metrics = Metrics(this, 26388)
     }
 }
