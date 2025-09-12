@@ -19,7 +19,7 @@ class Main : JavaPlugin() {
         Language.saveDefaultLang(this)
         Language.loadFile(this)
         Bukkit.getPluginManager().registerEvents(PlayerListener, this)
-        getCommand("locator")?.setExecutor(LocatorCommand(this))
+        getCommand("locator")?.setExecutor(LocatorCommand())
         val metrics = Metrics(this, 26388)
     }
 }

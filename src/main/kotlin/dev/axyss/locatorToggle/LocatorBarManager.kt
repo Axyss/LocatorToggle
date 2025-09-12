@@ -16,33 +16,43 @@ class LocatorBarManager(private val player: Player) {
     private val transmitRangeAttr = player.getAttribute(Attribute.WAYPOINT_TRANSMIT_RANGE)
 
     companion object {
-        private val locatorStatusKey = NamespacedKey(plugin, "is-locator-enabled")
         lateinit var plugin: Plugin
+
+        private fun getLocatorStatusKey(): NamespacedKey {
+            return NamespacedKey(plugin, "is-locator-enabled")
+        }
     }
 
     init {
+        val locatorStatusKey = getLocatorStatusKey()
         if (!player.persistentDataContainer.has(locatorStatusKey)) {
             player.persistentDataContainer.set(locatorStatusKey, PersistentDataType.BOOLEAN, true)
         }
     }
 
     fun isEnabled(): Boolean {
-        return player.persistentDataContainer.get(locatorStatusKey, PersistentDataType.BOOLEAN)!!
+        return player.persistentDataContainer.get(getLocatorStatusKey(), PersistentDataType.BOOLEAN)!!
     }
 
     fun isDisabled(): Boolean { // Redundant method for better clarity
         return !isEnabled()
     }
 
-    fun enable() {
+    // The temporal attribute is used to enable/disable the locator bar when player joins/quits without changing
+    // their preference. This prevents plugin behaviour from persisting after unloading or removing.
+    fun enable(temporal: Boolean = false) {
         receiveRangeAttr?.baseValue = BlockDistance.WORLD_MAX.value
         transmitRangeAttr?.baseValue = BlockDistance.WORLD_MAX.value
-        player.persistentDataContainer.set(locatorStatusKey, PersistentDataType.BOOLEAN, true)
+        if (!temporal) {
+            player.persistentDataContainer.set(getLocatorStatusKey(), PersistentDataType.BOOLEAN, true)
+        }
     }
 
-    fun disable() {
+    fun disable(temporal: Boolean = false) {
         receiveRangeAttr?.baseValue = BlockDistance.NONE.value
         transmitRangeAttr?.baseValue = BlockDistance.NONE.value
-        player.persistentDataContainer.set(locatorStatusKey, PersistentDataType.BOOLEAN, false)
+        if (!temporal) {
+            player.persistentDataContainer.set(getLocatorStatusKey(), PersistentDataType.BOOLEAN, false)
+        }
     }
 }
