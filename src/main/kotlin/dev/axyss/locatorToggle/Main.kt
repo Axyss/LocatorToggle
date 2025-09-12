@@ -20,6 +20,24 @@ class Main : JavaPlugin() {
         Language.loadFile(this)
         Bukkit.getPluginManager().registerEvents(PlayerListener, this)
         getCommand("locator")?.setExecutor(LocatorCommand())
-        val metrics = Metrics(this, 26388)
+
+        // Partial plugman compatibility
+        for (player in Bukkit.getOnlinePlayers()) {
+            val locatorBar = LocatorBarManager(player)
+            if (locatorBar.isDisabled()) {
+                locatorBar.disable(true)
+            }
+        }
+        val metrics = Metrics(this, 26388) // Telemetry
+    }
+
+    // Partial plugman compatibility
+    override fun onDisable() {
+        for (player in Bukkit.getOnlinePlayers()) {
+            val locatorBar = LocatorBarManager(player)
+            if (locatorBar.isDisabled()) {
+                locatorBar.enable(true)
+            }
+        }
     }
 }
