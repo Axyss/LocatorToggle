@@ -1,6 +1,7 @@
 package dev.axyss.locatorToggle
 
 import dev.axyss.locatorToggle.commands.LocatorCommand
+import dev.axyss.locatorToggle.commands.RadiusCommand
 import dev.axyss.locatorToggle.listeners.PlayerListener
 import dev.axyss.locatorToggle.utils.Language
 import org.bstats.bukkit.Metrics
@@ -20,6 +21,7 @@ class Main : JavaPlugin() {
         Language.loadFile(this)
         Bukkit.getPluginManager().registerEvents(PlayerListener, this)
         getCommand("locator")?.setExecutor(LocatorCommand())
+        getCommand("radius")?.setExecutor(RadiusCommand())
 
         // Partial plugman compatibility
         for (player in Bukkit.getOnlinePlayers()) {

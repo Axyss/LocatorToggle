@@ -1,3 +1,4 @@
 messages:
   locator-toggled-on: "&aLocator bar toggled &a&lON"
   locator-toggled-off: "&aLocator bar toggled &c&lOFF"
+  locator-radius-set: "&aLocator radius set to &e{radius}"

@@ -1,5 +1,5 @@
 name: LocatorToggle
-version: '1.1'
+version: '1.2'
 author: Axyss
 main: dev.axyss.locatorToggle.Main
 api-version: '1.21'
@@ -7,6 +7,8 @@ api-version: '1.21'
 commands:
   locator:
     description: Toggles locator bar functionality
+  radius:
+    description: Sets the radius for the locator bar
 
 permission:
   locator.toggle:

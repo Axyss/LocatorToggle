@@ -21,6 +21,10 @@ class LocatorBarManager(private val player: Player) {
         private fun getLocatorStatusKey(): NamespacedKey {
             return NamespacedKey(plugin, "is-locator-enabled")
         }
+
+        private fun getLocatorRadiusKey(): NamespacedKey {
+            return NamespacedKey(plugin, "locator-radius")
+        }
     }
 
     init {
@@ -28,6 +32,7 @@ class LocatorBarManager(private val player: Player) {
         if (!player.persistentDataContainer.has(locatorStatusKey)) {
             player.persistentDataContainer.set(locatorStatusKey, PersistentDataType.BOOLEAN, true)
         }
+        // LocatorRadiusKey should not be initialized in case Mojang modifies the default radius
     }
 
     fun isEnabled(): Boolean {
@@ -38,11 +43,19 @@ class LocatorBarManager(private val player: Player) {
         return !isEnabled()
     }
 
+    private fun hasCustomRadius(): Boolean {
+        return player.persistentDataContainer.has(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
+    }
+
+    private fun getCustomRadius(): Double? {
+        return player.persistentDataContainer.get(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
+    }
+
     // The temporal attribute is used to enable/disable the locator bar when player joins/quits without changing
-    // their preference. This prevents plugin behaviour from persisting after unloading or removing.
+    // their preference. This prevents plugin behaviour from persisting after its removal.
     fun enable(temporal: Boolean = false) {
-        receiveRangeAttr?.baseValue = BlockDistance.WORLD_MAX.value
-        transmitRangeAttr?.baseValue = BlockDistance.WORLD_MAX.value
+        receiveRangeAttr?.baseValue = (if (hasCustomRadius()) getCustomRadius() else BlockDistance.WORLD_MAX.value)!!
+        transmitRangeAttr?.baseValue = (if (hasCustomRadius()) getCustomRadius() else BlockDistance.WORLD_MAX.value)!!
         if (!temporal) {
             player.persistentDataContainer.set(getLocatorStatusKey(), PersistentDataType.BOOLEAN, true)
         }
@@ -54,5 +67,9 @@ class LocatorBarManager(private val player: Player) {
         if (!temporal) {
             player.persistentDataContainer.set(getLocatorStatusKey(), PersistentDataType.BOOLEAN, false)
         }
+    }
+
+    fun setCustomRadius(radius: Double) {
+        player.persistentDataContainer.set(getLocatorRadiusKey(), PersistentDataType.DOUBLE, radius)
     }
 }
