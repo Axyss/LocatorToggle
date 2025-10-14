@@ -1,7 +1,6 @@
 package dev.axyss.locatorToggle.commands
 
 import dev.axyss.locatorToggle.LocatorBarManager
-import dev.axyss.locatorToggle.Main
 import dev.axyss.locatorToggle.utils.Language
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -18,8 +17,8 @@ class RadiusCommand(private val plugin: JavaPlugin): CommandExecutor {
         // todo Validate user input
         locatorBar.setCustomRadius(p3.get(0).toDouble())
         if (locatorBar.isEnabled()) {
-            locatorBar.disable(true)
-            Bukkit.getScheduler().runTaskLater(plugin, Runnable { locatorBar.enable(true) }, 10L)
+            locatorBar.disableTemporarily()
+            Bukkit.getScheduler().runTaskLater(plugin, Runnable { locatorBar.enableTemporarily() }, 10L)
         }
         sender.sendMessage(Language.getMessage("locator-radius-set").replace("{radius}", p3.get(0)))
         return true

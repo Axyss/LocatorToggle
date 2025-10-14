@@ -9,7 +9,7 @@ object PlayerListener : Listener {
     fun onPlayerJoin(event: org.bukkit.event.player.PlayerJoinEvent) {
         val locatorBar = LocatorBarManager(event.player)
         if (locatorBar.isDisabled()) {
-            locatorBar.disable(true)
+            locatorBar.disableTemporarily()
         }
     }
 
@@ -17,7 +17,7 @@ object PlayerListener : Listener {
     fun onPlayerQuit(event: org.bukkit.event.player.PlayerQuitEvent) {
         val locatorBar = LocatorBarManager(event.player)
         if (locatorBar.isDisabled()) {
-            locatorBar.enable(true)
+            locatorBar.enableTemporarily()
         }
     }
 }

@@ -27,7 +27,7 @@ class Main : JavaPlugin() {
         for (player in Bukkit.getOnlinePlayers()) {
             val locatorBar = LocatorBarManager(player)
             if (locatorBar.isDisabled()) {
-                locatorBar.disable(true)
+                locatorBar.disableTemporarily()
             }
         }
         val metrics = Metrics(this, 26388) // Telemetry
@@ -38,7 +38,7 @@ class Main : JavaPlugin() {
         for (player in Bukkit.getOnlinePlayers()) {
             val locatorBar = LocatorBarManager(player)
             if (locatorBar.isDisabled()) {
-                locatorBar.enable(true)
+                locatorBar.enableTemporarily()
             }
         }
     }
