@@ -13,14 +13,19 @@ class RadiusCommand(private val plugin: JavaPlugin): CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, subcommand: String, p3: Array<out String>): Boolean {
         if (sender !is Player) return false
         val locatorBar = LocatorBarManager(sender)
+        val radius = p3.getOrNull(0)?.toIntOrNull()
 
-        // todo Validate user input
-        locatorBar.setCustomRadius(p3.get(0).toDouble())
+        if (radius == null || radius < 1 || radius > 60_000_000) {
+            sender.sendMessage(Language.getMessage("locator-radius-invalid"))
+            return false;
+        }
+
+        locatorBar.setCustomRadius(radius.toDouble())
         if (locatorBar.isEnabled()) {
             locatorBar.disableTemporarily()
             Bukkit.getScheduler().runTaskLater(plugin, Runnable { locatorBar.enableTemporarily() }, 10L)
         }
-        sender.sendMessage(Language.getMessage("locator-radius-set").replace("{radius}", p3.get(0)))
+        sender.sendMessage(Language.getMessage("locator-radius-set").replace("{radius}", radius.toString()))
         return true
     }
 }
