@@ -21,7 +21,7 @@ class Main : JavaPlugin() {
         Language.loadFile(this)
         Bukkit.getPluginManager().registerEvents(PlayerListener, this)
         getCommand("locator")?.setExecutor(LocatorCommand())
-        getCommand("radius")?.setExecutor(RadiusCommand(this))
+        getCommand("radius")?.setExecutor(RadiusCommand())
 
         // Partial plugman compatibility
         for (player in Bukkit.getOnlinePlayers()) {

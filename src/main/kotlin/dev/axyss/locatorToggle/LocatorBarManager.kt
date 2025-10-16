@@ -1,5 +1,6 @@
 package dev.axyss.locatorToggle
 
+import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
 import org.bukkit.entity.Player
@@ -75,5 +76,9 @@ class LocatorBarManager(private val player: Player) {
 
     fun setCustomRadius(radius: Double) {
         player.persistentDataContainer.set(getLocatorRadiusKey(), PersistentDataType.DOUBLE, radius)
+        if (this.isEnabled()) {
+            this.disableTemporarily()
+            Bukkit.getScheduler().runTaskLater(plugin, Runnable { this.enableTemporarily() }, 2L)
+        }
     }
 }
