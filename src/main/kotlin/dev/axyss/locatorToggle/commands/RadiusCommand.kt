@@ -18,7 +18,7 @@ class RadiusCommand(): CommandExecutor {
             return false;
         }
 
-        locatorBar.setCustomRadius(radius.toDouble())
+        locatorBar.setRadius(radius.toDouble())
         sender.sendMessage(Language.getMessage("locator-radius-set").replace("{radius}", radius.toString()))
         return true
     }

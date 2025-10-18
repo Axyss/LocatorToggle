@@ -44,19 +44,19 @@ class LocatorBarManager(private val player: Player) {
         return !isEnabled()
     }
 
-    private fun hasCustomRadius(): Boolean {
+    private fun hasRadius(): Boolean {
         return player.persistentDataContainer.has(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
     }
 
-    private fun getCustomRadius(): Double? {
+    private fun getRadius(): Double? {
         return player.persistentDataContainer.get(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
     }
 
     // The temporary counterparts are used to enable/disable the locator bar when player joins/quits without changing
     // their preference. This prevents plugin behaviour from persisting after its removal.
     fun enableTemporarily() {
-        receiveRangeAttr?.baseValue = (if (hasCustomRadius()) getCustomRadius() else BlockDistance.WORLD_MAX.value)!!
-        transmitRangeAttr?.baseValue = (if (hasCustomRadius()) getCustomRadius() else BlockDistance.WORLD_MAX.value)!!
+        receiveRangeAttr?.baseValue = (if (hasRadius()) getRadius() else BlockDistance.WORLD_MAX.value)!!
+        transmitRangeAttr?.baseValue = (if (hasRadius()) getRadius() else BlockDistance.WORLD_MAX.value)!!
     }
 
     fun enable() {
@@ -74,7 +74,7 @@ class LocatorBarManager(private val player: Player) {
         player.persistentDataContainer.set(getLocatorStatusKey(), PersistentDataType.BOOLEAN, false)
     }
 
-    fun setCustomRadius(radius: Double) {
+    fun setRadius(radius: Double) {
         player.persistentDataContainer.set(getLocatorRadiusKey(), PersistentDataType.DOUBLE, radius)
         if (this.isEnabled()) {
             this.disableTemporarily()
