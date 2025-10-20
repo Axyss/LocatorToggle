@@ -44,11 +44,11 @@ class LocatorBarManager(private val player: Player) {
         return !isEnabled()
     }
 
-    private fun hasRadius(): Boolean {
+    fun hasRadius(): Boolean {
         return player.persistentDataContainer.has(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
     }
 
-    private fun getRadius(): Double? {
+    fun getRadius(): Double? {
         return player.persistentDataContainer.get(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
     }
 
