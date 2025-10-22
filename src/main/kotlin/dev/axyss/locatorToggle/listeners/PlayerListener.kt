@@ -10,14 +10,13 @@ object PlayerListener : Listener {
         val locatorBar = LocatorBarManager(event.player)
         if (locatorBar.isDisabled()) {
             locatorBar.disableTemporarily()
+        } else {
+            locatorBar.enableTemporarily()
         }
     }
 
     @EventHandler
     fun onPlayerQuit(event: org.bukkit.event.player.PlayerQuitEvent) {
-        val locatorBar = LocatorBarManager(event.player)
-        if (locatorBar.isDisabled()) {
-            locatorBar.enableTemporarily()
-        }
+        LocatorBarManager(event.player).enableTemporarily(false)
     }
 }

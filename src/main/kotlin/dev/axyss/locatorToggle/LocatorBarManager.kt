@@ -44,19 +44,12 @@ class LocatorBarManager(private val player: Player) {
         return !isEnabled()
     }
 
-    fun hasRadius(): Boolean {
+    private fun hasRadius(): Boolean {
         return player.persistentDataContainer.has(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
     }
 
-    fun getRadius(): Double? {
+    private fun getRadius(): Double? {
         return player.persistentDataContainer.get(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
-    }
-
-    // The temporary counterparts are used to enable/disable the locator bar when player joins/quits without changing
-    // their preference. This prevents plugin behaviour from persisting after its removal.
-    fun enableTemporarily() {
-        receiveRangeAttr?.baseValue = (if (hasRadius()) getRadius() else BlockDistance.WORLD_MAX.value)!!
-        transmitRangeAttr?.baseValue = (if (hasRadius()) getRadius() else BlockDistance.WORLD_MAX.value)!!
     }
 
     fun enable() {
@@ -64,20 +57,31 @@ class LocatorBarManager(private val player: Player) {
         player.persistentDataContainer.set(getLocatorStatusKey(), PersistentDataType.BOOLEAN, true)
     }
 
-    fun disableTemporarily() {
-        receiveRangeAttr?.baseValue = BlockDistance.NONE.value
-        transmitRangeAttr?.baseValue = BlockDistance.NONE.value
-    }
-
     fun disable() {
         disableTemporarily()
         player.persistentDataContainer.set(getLocatorStatusKey(), PersistentDataType.BOOLEAN, false)
     }
 
+    // The temporary counterparts are used to enable/disable the locator bar when player joins/quits without changing
+    // their preference. This prevents plugin behaviour from persisting after its removal.
+    fun enableTemporarily(useCustomRadius: Boolean = true) {
+        if (useCustomRadius && hasRadius()) {
+            receiveRangeAttr?.baseValue = getRadius()!!
+            transmitRangeAttr?.baseValue = getRadius()!!
+        } else {
+            receiveRangeAttr?.baseValue = BlockDistance.WORLD_MAX.value
+            transmitRangeAttr?.baseValue = BlockDistance.WORLD_MAX.value
+        }
+    }
+
+    fun disableTemporarily() {
+        receiveRangeAttr?.baseValue = BlockDistance.NONE.value
+        transmitRangeAttr?.baseValue = BlockDistance.NONE.value
+    }
+
     fun setRadius(radius: Double) {
         player.persistentDataContainer.set(getLocatorRadiusKey(), PersistentDataType.DOUBLE, radius)
         if (this.isEnabled()) {
-            this.disableTemporarily()
             Bukkit.getScheduler().runTaskLater(plugin, Runnable { this.enableTemporarily() }, 2L)
         }
     }
