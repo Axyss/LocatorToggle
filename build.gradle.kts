@@ -15,10 +15,14 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
+    maven {
+        url = uri("https://repo.extendedclip.com/releases/")
+    }
 }
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.7-R0.1-SNAPSHOT")
+    compileOnly("me.clip:placeholderapi:2.11.6")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.bstats:bstats-bukkit:3.0.2")
 }
