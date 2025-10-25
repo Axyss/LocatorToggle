@@ -4,6 +4,7 @@ import dev.axyss.locatorToggle.commands.LocatorCommand
 import dev.axyss.locatorToggle.commands.RadiusCommand
 import dev.axyss.locatorToggle.listeners.PlayerListener
 import dev.axyss.locatorToggle.utils.Language
+import dev.axyss.locatorToggle.utils.PapiExpansion
 import org.bstats.bukkit.Metrics
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
@@ -14,6 +15,9 @@ class Main : JavaPlugin() {
             logger.severe("Locator bar is not supported on this server version")
             Bukkit.getPluginManager().disablePlugin(this)
             return
+        }
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            PapiExpansion().register();
         }
 
         LocatorBarManager.plugin = this
