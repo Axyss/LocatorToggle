@@ -17,7 +17,8 @@ class Main : JavaPlugin() {
             return
         }
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            PapiExpansion().register();
+            this.server.consoleSender.sendMessage("Hooked into PlaceholderAPI")
+            PapiExpansion(this).register()
         }
 
         LocatorBarManager.plugin = this

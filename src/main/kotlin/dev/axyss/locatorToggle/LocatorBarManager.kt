@@ -48,7 +48,7 @@ class LocatorBarManager(private val player: Player) {
         return player.persistentDataContainer.has(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
     }
 
-    private fun getRadius(): Double? {
+    fun getRadius(): Double? {
         return player.persistentDataContainer.get(getLocatorRadiusKey(), PersistentDataType.DOUBLE)
     }
 

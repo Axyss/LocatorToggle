@@ -1,16 +1,23 @@
 package dev.axyss.locatorToggle.utils;
 
+import dev.axyss.locatorToggle.LocatorBarManager;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.jetbrains.annotations.NotNull;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 public class PapiExpansion extends PlaceholderExpansion {
+
+    private final Plugin plugin;
+
+    public PapiExpansion(Plugin plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     @NotNull
     public String getAuthor() {
-        return "Axyss";
+        return String.join(" ", plugin.getDescription().getAuthors());
     }
 
     @Override
@@ -22,14 +29,21 @@ public class PapiExpansion extends PlaceholderExpansion {
     @Override
     @NotNull
     public String getVersion() {
-        return "1.0.0";
+        return plugin.getDescription().getVersion();
     }
 
-    public String onRequest(OfflinePlayer player, @NotNull String params) {
-        return null;
+    @Override
+    public boolean persist() {
+        return true;
     }
 
+    @Override
     public String onPlaceholderRequest(Player player, @NotNull String params) {
+        if (params.equalsIgnoreCase("status")) {
+            return String.valueOf(new LocatorBarManager(player).isEnabled());
+        } else if (params.equalsIgnoreCase("radius")) {
+            return String.valueOf(new LocatorBarManager(player).getRadius());
+        }
         return null;
     }
 }
