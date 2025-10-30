@@ -1,49 +1,40 @@
-package dev.axyss.locatorToggle.utils;
+package dev.axyss.locatorToggle.utils
 
-import dev.axyss.locatorToggle.LocatorBarManager;
-import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.jetbrains.annotations.NotNull;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
+import dev.axyss.locatorToggle.LocatorBarManager
+import me.clip.placeholderapi.expansion.PlaceholderExpansion
+import org.bukkit.entity.Player
+import org.bukkit.plugin.Plugin
 
-public class PapiExpansion extends PlaceholderExpansion {
+class PapiExpansion(private val plugin: Plugin) : PlaceholderExpansion() {
 
-    private final Plugin plugin;
-
-    public PapiExpansion(Plugin plugin) {
-        this.plugin = plugin;
+    override fun getAuthor(): String {
+        return plugin.description.authors.joinToString(" ")
     }
 
-    @Override
-    @NotNull
-    public String getAuthor() {
-        return String.join(" ", plugin.getDescription().getAuthors());
+    override fun getIdentifier(): String {
+        return "locatortoggle"
     }
 
-    @Override
-    @NotNull
-    public String getIdentifier() {
-        return "locatortoggle";
+    override fun getVersion(): String {
+        return plugin.description.version
     }
 
-    @Override
-    @NotNull
-    public String getVersion() {
-        return plugin.getDescription().getVersion();
+    override fun persist(): Boolean {
+        return true
     }
 
-    @Override
-    public boolean persist() {
-        return true;
-    }
+    override fun onPlaceholderRequest(player: Player?, params: String): String? {
+        player ?: return null
 
-    @Override
-    public String onPlaceholderRequest(Player player, @NotNull String params) {
-        if (params.equalsIgnoreCase("status")) {
-            return String.valueOf(new LocatorBarManager(player).isEnabled());
-        } else if (params.equalsIgnoreCase("radius")) {
-            return String.valueOf(new LocatorBarManager(player).getRadius());
+        return when {
+            params.equals("status", ignoreCase = true) -> {
+                LocatorBarManager(player).isEnabled().toString()
+            }
+            params.equals("radius", ignoreCase = true) -> {
+                LocatorBarManager(player).getRadius().toString()
+            }
+            else -> null
         }
-        return null;
     }
 }
+
