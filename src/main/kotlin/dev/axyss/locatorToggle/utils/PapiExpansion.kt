@@ -27,10 +27,10 @@ class PapiExpansion(private val plugin: Plugin) : PlaceholderExpansion() {
         player ?: return null
 
         return when {
-            params.equals("status", ignoreCase = true) -> {
-                LocatorBarManager(player).isEnabled().toString()
+            params == "status" -> {
+                if (LocatorBarManager(player).isEnabled()) "enabled" else "disabled"
             }
-            params.equals("radius", ignoreCase = true) -> {
+            params == "radius" -> {
                 LocatorBarManager(player).getRadius().toString()
             }
             else -> null
