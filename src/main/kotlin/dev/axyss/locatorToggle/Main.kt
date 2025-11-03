@@ -1,5 +1,6 @@
 package dev.axyss.locatorToggle
 
+import com.tchristofferson.configupdater.ConfigUpdater
 import dev.axyss.locatorToggle.commands.LocatorCommand
 import dev.axyss.locatorToggle.commands.RadiusCommand
 import dev.axyss.locatorToggle.listeners.PlayerListener
@@ -8,6 +9,8 @@ import dev.axyss.locatorToggle.utils.PapiExpansion
 import org.bstats.bukkit.Metrics
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
+import java.io.File
+
 
 class Main : JavaPlugin() {
     override fun onEnable() {
@@ -17,10 +20,13 @@ class Main : JavaPlugin() {
             return
         }
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            this.server.consoleSender.sendMessage("Hooked into PlaceholderAPI")
+            logger.info("Hooked into PlaceholderAPI")
             PapiExpansion(this).register()
         }
 
+        saveDefaultConfig()
+        ConfigUpdater.update(this, "config.yml", File(dataFolder, "config.yml"), listOf())
+        reloadConfig()
         LocatorBarManager.plugin = this
         Language.saveDefaultLang(this)
         Language.loadFile(this)

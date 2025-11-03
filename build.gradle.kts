@@ -25,6 +25,7 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.11.6")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.bstats:bstats-bukkit:3.0.2")
+    implementation("com.tchristofferson:ConfigUpdater:2.2")
 }
 
 tasks {
