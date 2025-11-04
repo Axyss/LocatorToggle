@@ -1,0 +1,2 @@
+# Whether new users will have their locator disabled by default.
+locator-disabled-by-default: false

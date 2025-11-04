@@ -31,7 +31,7 @@ class LocatorBarManager(private val player: Player) {
     init {
         val locatorStatusKey = getLocatorStatusKey()
         if (!player.persistentDataContainer.has(locatorStatusKey)) {
-            player.persistentDataContainer.set(locatorStatusKey, PersistentDataType.BOOLEAN, true)
+            player.persistentDataContainer.set(locatorStatusKey, PersistentDataType.BOOLEAN, !plugin.config.getBoolean("locator-disabled-by-default"))
         }
         // LocatorRadiusKey should not be initialized in case Mojang modifies the default radius
     }
