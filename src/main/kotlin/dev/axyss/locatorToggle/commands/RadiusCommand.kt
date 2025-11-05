@@ -10,6 +10,8 @@ import org.bukkit.entity.Player
 class RadiusCommand(): CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, subcommand: String, p3: Array<out String>): Boolean {
         if (sender !is Player) return false
+        if (!sender.hasPermission("locator.radius")) return false
+
         val locatorBar = LocatorBarManager(sender)
         val radius = p3.getOrNull(0)?.toIntOrNull()
 

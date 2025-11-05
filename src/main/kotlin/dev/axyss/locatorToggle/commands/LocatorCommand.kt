@@ -11,6 +11,8 @@ import org.bukkit.entity.Player
 class LocatorCommand(): CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, subcommand: String, p3: Array<out String>): Boolean {
         if (sender !is Player) return false
+        if (!sender.hasPermission("locator.toggle")) return false
+
         val locatorBar = LocatorBarManager(sender)
 
         if (locatorBar.isEnabled()) {
