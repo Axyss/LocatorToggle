@@ -26,6 +26,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.bstats:bstats-bukkit:3.0.2")
     implementation("com.tchristofferson:ConfigUpdater:2.2")
+    implementation("org.incendo:cloud-core:2.0.0")
+    implementation("org.incendo:cloud-annotations:2.0.0")
+    implementation("org.incendo:cloud-paper:2.0.0-beta.10")
+    implementation("org.incendo:cloud-kotlin-extensions:2.0.0")
 }
 
 tasks {
