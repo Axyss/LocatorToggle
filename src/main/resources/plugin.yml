@@ -7,10 +7,3 @@ softdepend: ["PlaceholderAPI"]
 
 commands:
   locator:
-    description: Toggles locator bar functionality
-  radius:
-    description: Sets the radius for the locator bar
-
-permission:
-  locator.toggle:
-    default: true

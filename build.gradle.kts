@@ -18,6 +18,9 @@ repositories {
     maven {
         url = uri("https://repo.extendedclip.com/releases/")
     }
+    maven {
+        url = uri("https://repo.aikar.co/content/groups/aikar/")
+    }
 }
 
 dependencies {
@@ -26,10 +29,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.bstats:bstats-bukkit:3.0.2")
     implementation("com.tchristofferson:ConfigUpdater:2.2")
-    implementation("org.incendo:cloud-core:2.0.0")
-    implementation("org.incendo:cloud-annotations:2.0.0")
-    implementation("org.incendo:cloud-paper:2.0.0-beta.10")
-    implementation("org.incendo:cloud-kotlin-extensions:2.0.0")
+    implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
 }
 
 tasks {
@@ -41,9 +41,11 @@ tasks {
     }
 }
 
-val targetJavaVersion = 21
 kotlin {
-    jvmToolchain(targetJavaVersion)
+    jvmToolchain(21)
+    compilerOptions {
+        javaParameters.set(true)
+    }
 }
 
 tasks.build {
@@ -61,4 +63,6 @@ tasks.processResources {
 
 tasks.shadowJar {
     relocate("org.bstats", "dev.axyss.locatorToggle.utils")
+    relocate("co.aikar.commands", "dev.axyss.locatorToggle.utils")
+    relocate("co.aikar.locales", "dev.axyss.locatorToggle.utils")
 }

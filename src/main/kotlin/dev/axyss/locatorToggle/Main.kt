@@ -1,18 +1,20 @@
 package dev.axyss.locatorToggle
 
 import com.tchristofferson.configupdater.ConfigUpdater
-import dev.axyss.locatorToggle.commands.LocatorCommand
-import dev.axyss.locatorToggle.commands.RadiusCommand
 import dev.axyss.locatorToggle.listeners.PlayerListener
 import dev.axyss.locatorToggle.utils.Language
 import dev.axyss.locatorToggle.utils.PapiExpansion
 import org.bstats.bukkit.Metrics
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
+import co.aikar.commands.PaperCommandManager
 import java.io.File
+import java.util.Locale
 
 
 class Main : JavaPlugin() {
+    private lateinit var commandManager: PaperCommandManager
+
     override fun onEnable() {
         if (Bukkit.getUnsafe().dataVersion < 771) {
             logger.severe("Locator bar is not supported on this server version")
@@ -27,12 +29,17 @@ class Main : JavaPlugin() {
         saveDefaultConfig()
         ConfigUpdater.update(this, "config.yml", File(dataFolder, "config.yml"), listOf())
         reloadConfig()
+
         LocatorBarManager.plugin = this
         Language.saveDefaultLang(this)
         Language.loadFile(this)
+
+        commandManager = PaperCommandManager(this)
+        commandManager.locales.loadYamlLanguageFile("lang.yml", Locale.ENGLISH)
+        commandManager.locales.defaultLocale = Locale.ENGLISH
+        commandManager.registerCommand(LocatorCommand())
+
         Bukkit.getPluginManager().registerEvents(PlayerListener, this)
-        getCommand("locator")?.setExecutor(LocatorCommand())
-        getCommand("radius")?.setExecutor(RadiusCommand())
 
         // Partial plugman compatibility
         for (player in Bukkit.getOnlinePlayers()) {
