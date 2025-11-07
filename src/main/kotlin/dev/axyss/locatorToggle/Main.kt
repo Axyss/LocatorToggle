@@ -22,17 +22,16 @@ class Main : JavaPlugin() {
             return
         }
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            logger.info("Hooked into PlaceholderAPI")
             PapiExpansion(this).register()
         }
 
         saveDefaultConfig()
-        ConfigUpdater.update(this, "config.yml", File(dataFolder, "config.yml"), listOf())
-        reloadConfig()
-
-        LocatorBarManager.plugin = this
         Language.saveDefaultLang(this)
+        LocatorBarManager.plugin = this
         Language.loadFile(this)
+        ConfigUpdater.update(this, "config.yml", File(dataFolder, "config.yml"), listOf())
+        ConfigUpdater.update(this, "lang.yml", File(dataFolder, "lang.yml"), listOf())
+        reloadConfig()
 
         commandManager = PaperCommandManager(this)
         commandManager.locales.loadYamlLanguageFile("lang.yml", Locale.ENGLISH)

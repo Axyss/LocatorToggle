@@ -9,11 +9,10 @@ import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Subcommand
 
 
-@CommandAlias("locator|lt")
+@CommandAlias("locator")
 class LocatorCommand : BaseCommand() {
 
     @Default
-    @CommandAlias("locator|lt")
     @CommandPermission("locator.toggle")
     fun toggle(sender: Player) {
         val locatorBar = LocatorBarManager(sender)
@@ -28,7 +27,6 @@ class LocatorCommand : BaseCommand() {
     }
 
     @Subcommand("radius")
-    @CommandAlias("lr")
     @CommandPermission("locator.radius")
     fun radius(sender: Player, radius: Long) {
         if (radius !in 1..60000000) {
