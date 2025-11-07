@@ -3,3 +3,10 @@ messages:
   locator-toggled-off: "&aLocator bar toggled &c&lOFF"
   locator-radius-set: "&aLocator radius set to &e{radius}"
   locator-radius-invalid: "&cInvalid radius. Provide a value between &e1 &cand &e60,000,000"
+acf-core:
+  invalid_syntax: "&cUsage: &e{command} {syntax}"
+  permission_denied: "&cYou don't have permission to use this command."
+  permission_denied_parameter: "&cYou don't have permission to use this command."
+  error_generic_logged: "&cAn error occurred. Please contact an administrator."
+  unknown_command: "&cUnknown command. Use &e/locator or /locator radius <value>&c."
+
