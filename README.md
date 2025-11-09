@@ -13,7 +13,7 @@ When toggled off, the player is also hidden from other players’ locator bars, 
 
 ## 🛠️ Commands
 - **/locator** - Toggles the locator bar functionality on/off for the player.
-- **/locator radius <value>** - Sets the locator bar radius (1-60,000,000 blocks).
+- **/locator radius \<value>** - Sets the locator bar radius (1-60,000,000 blocks).
 
 ## 🔐 Permissions
 | Permission node | Description                                      | Default setting |
