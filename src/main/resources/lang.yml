@@ -8,5 +8,6 @@ acf-core:
   permission_denied: "&cYou don't have permission to use this command."
   permission_denied_parameter: "&cYou don't have permission to use this command."
   error_generic_logged: "&cAn error occurred. Please contact an administrator."
+  must_be_a_number: 'Error: {num} must be a number.'
   unknown_command: "&cUnknown command. Use &e/locator or /locator radius <value>&c."
 
