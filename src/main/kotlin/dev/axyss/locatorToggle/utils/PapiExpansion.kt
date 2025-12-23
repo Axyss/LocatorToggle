@@ -28,7 +28,10 @@ class PapiExpansion(private val plugin: Plugin) : PlaceholderExpansion() {
 
         return when {
             params == "status" -> {
-                if (LocatorBarManager(player).isEnabled()) "enabled" else "disabled"
+                if (LocatorBarManager(player).isEnabled())
+                    Language.getMessage("placeholder-status-enabled")
+                else
+                    Language.getMessage("placeholder-status-disabled")
             }
             params == "radius" -> {
                 LocatorBarManager(player).getRadius().toString()

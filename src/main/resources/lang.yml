@@ -3,6 +3,8 @@ messages:
   locator-toggled-off: "&aLocator bar toggled &c&lOFF"
   locator-radius-set: "&aLocator radius set to &e{radius}"
   locator-radius-invalid: "&cInvalid radius. Provide a value between &e1 &cand &e60,000,000"
+  placeholder-status-enabled: "&aenabled"
+  placeholder-status-disabled: "&cdisabled"
 acf-core:
   invalid_syntax: "&cUsage: &e{command} {syntax}"
   permission_denied: "&cYou don't have permission to use this command."
