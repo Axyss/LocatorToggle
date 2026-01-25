@@ -1,2 +1,5 @@
 # Whether new users will have their locator disabled by default.
 locator-disabled-by-default: false
+
+# Maximum radius that players can set using /locator radius.
+locator-max-radius: 60000000

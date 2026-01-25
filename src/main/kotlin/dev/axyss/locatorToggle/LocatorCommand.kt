@@ -29,8 +29,10 @@ class LocatorCommand : BaseCommand() {
     @Subcommand("radius")
     @CommandPermission("locator.radius")
     fun radius(sender: Player, radius: Long) {
-        if (radius !in 1..60000000) {
-            sender.sendMessage(Language.getMessage("locator-radius-invalid"))
+        val maxRadius = LocatorBarManager.plugin.config.getLong("locator-max-radius", 60000000L)
+
+        if (radius !in 1..maxRadius) {
+            sender.sendMessage(Language.getMessage("locator-radius-invalid").replace("{max}", maxRadius.toString()))
             return
         }
 
