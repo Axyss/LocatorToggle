@@ -69,8 +69,9 @@ class LocatorBarManager(private val player: Player) {
             receiveRangeAttr?.baseValue = getRadius()!!
             transmitRangeAttr?.baseValue = getRadius()!!
         } else {
-            receiveRangeAttr?.baseValue = BlockDistance.WORLD_MAX.value
-            transmitRangeAttr?.baseValue = BlockDistance.WORLD_MAX.value
+            val defaultRadius = plugin.config.getDouble("default-locator-radius", BlockDistance.WORLD_MAX.value)
+            receiveRangeAttr?.baseValue = defaultRadius
+            transmitRangeAttr?.baseValue = defaultRadius
         }
     }
 

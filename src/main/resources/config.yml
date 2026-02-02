@@ -3,3 +3,8 @@ locator-disabled-by-default: false
 
 # Maximum radius that players can set using /locator radius.
 locator-max-radius: 60000000
+
+# Default radius when players enable the locator.
+# This only applies when the player hasn't set a custom radius yet.
+default-locator-radius: 60000000
+
