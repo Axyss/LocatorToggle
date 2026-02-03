@@ -7,6 +7,8 @@ import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Subcommand
+import org.bukkit.command.CommandSender
+import org.bukkit.plugin.java.JavaPlugin
 
 
 @CommandAlias("locator")
@@ -38,5 +40,13 @@ class LocatorCommand : BaseCommand() {
 
         LocatorBarManager(sender).setRadius(radius.toDouble())
         sender.sendMessage(Language.getMessage("locator-radius-set").replace("{radius}", radius.toString()))
+    }
+
+    @Subcommand("reload")
+    @CommandPermission("locator.reload")
+    fun reload(sender: CommandSender) {
+        LocatorBarManager.plugin.reloadConfig()
+        Language.loadFile(LocatorBarManager.plugin as JavaPlugin)
+        sender.sendMessage(Language.getMessage("locator-reloaded"))
     }
 }
