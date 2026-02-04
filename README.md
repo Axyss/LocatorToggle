@@ -14,12 +14,31 @@ When toggled off, the player is also hidden from other players’ locator bars, 
 ## 🛠️ Commands
 - **/locator** - Toggles the locator bar functionality on/off for the player.
 - **/locator radius \<value>** - Sets the locator bar radius (1-60,000,000 blocks).
+- **/locator reload** - Reloads the plugin configuration and language files.
 
 ## 🔐 Permissions
 | Permission node | Description                                      | Default setting |
 |-----------------|--------------------------------------------------|-----------------|
 | locator.toggle  | Controls usage of the /locator command           | Everyone        |
 | locator.radius  | Controls usage of the /locator radius subcommand | Everyone        |
+| locator.reload  | Controls usage of the /locator reload subcommand | Operators       |
+
+## ⚙️ Configuration
+<details>
+<summary>Click to view config.yml</summary>
+
+```yaml
+# Whether new users will have their locator disabled by default.
+locator-disabled-by-default: false
+
+# Maximum radius that players can set using /locator radius.
+locator-max-radius: 60000000
+
+# Default radius when players enable the locator.
+# This only applies when the player hasn't set a custom radius yet.
+default-locator-radius: 60000000
+```
+</details>
 
 ## 🔌 PlaceholderAPI Support
 This plugin provides the following placeholders:
