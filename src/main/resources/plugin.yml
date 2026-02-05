@@ -5,5 +5,10 @@ main: dev.axyss.locatorToggle.Main
 api-version: '1.21'
 softdepend: ["PlaceholderAPI"]
 
-commands:
-  locator:
+permissions:
+  locator.toggle:
+    default: true
+  locator.radius:
+    default: true
+  locator.reload:
+    default: op
