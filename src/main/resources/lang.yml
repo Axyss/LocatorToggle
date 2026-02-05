@@ -3,7 +3,7 @@ messages:
   locator-toggled-off: "&aLocator bar toggled &c&lOFF"
   locator-radius-set: "&aLocator radius set to &e{radius}"
   locator-radius-invalid: "&cInvalid radius. Provide a value between &e1 &cand &e{max}"
-  locator-reloaded: "&aConfiguration reloaded successfully."
+  locator-reloaded: "&aPlugin reloaded successfully"
   placeholder-status-enabled: "&aenabled"
   placeholder-status-disabled: "&cdisabled"
 acf-core:
